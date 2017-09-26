@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="200.0" prefWidth="324.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TrocaSenhaController">
+   <center>
+      <VBox alignment="CENTER_LEFT" prefHeight="147.0" prefWidth="324.0" BorderPane.alignment="CENTER_LEFT">
+         <children>
+            <HBox alignment="CENTER" prefHeight="53.0" prefWidth="300.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="120.0">
+                     <children>
+                        <Label text="Usuario" />
+                        <TextField fx:id="tfUsuario" prefWidth="120.0" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="120.0">
+                     <children>
+                        <Label text="Senha Atual" />
+                        <PasswordField fx:id="pwSenha" prefWidth="120.0" />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="52.0" prefWidth="300.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="120.0">
+                     <children>
+                        <Label text="Nova Senha" />
+                        <PasswordField fx:id="pwNovaSenha" prefWidth="120.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="120.0">
+                     <children>
+                        <Label text="Repita Nova Senha" />
+                        <PasswordField fx:id="pwRepitaNovaSenha" prefHeight="25.0" prefWidth="120.0" />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" onDragDetected="#Salvar" prefHeight="57.0" prefWidth="324.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#Salvar" prefWidth="80.0" text="Salvar" />
+            <Button mnemonicParsing="false" onAction="#Cancelar" prefWidth="80.0" text="Cancelar">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </bottom>
+   <top>
+      <HBox alignment="CENTER" prefHeight="43.0" prefWidth="324.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Troca de Senha">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+</BorderPane>

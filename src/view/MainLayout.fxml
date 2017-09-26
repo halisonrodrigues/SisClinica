@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="700.0" prefWidth="1170.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+   <top>
+      <VBox prefHeight="91.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="Cadastros">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#cadastroEmpresa" text="Empresa" />
+                        <MenuItem mnemonicParsing="false" onAction="#convenio" text="Convênio" />
+                        <MenuItem mnemonicParsing="false" onAction="#especialidade" text="Especialidade" />
+                        <MenuItem mnemonicParsing="false" onAction="#medico" text="Médico" />
+                        <MenuItem mnemonicParsing="false" text="Paciente" />
+                        <MenuItem mnemonicParsing="false" text="Horario de Atendimento" />
+                        <MenuItem mnemonicParsing="false" text="Medicamento" />
+                        <MenuItem mnemonicParsing="false" text="Exame" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Sair" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Movimentação">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Marcar Consulta" />
+                        <MenuItem mnemonicParsing="false" text="Consultas Marcadas" />
+                        <MenuItem mnemonicParsing="false" text="Quitação" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Relatórios">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Lista de Especialidades" />
+                        <MenuItem mnemonicParsing="false" text="Lista de Convênios" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <Menu mnemonicParsing="false" text="Médicos">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Lista de Médicos" />
+                              <MenuItem mnemonicParsing="false" text="Lista de Médicos por Especialidade" />
+                              <MenuItem mnemonicParsing="false" text="Lista de Consultas Marcadas" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Pacientes">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Ficha" />
+                              <MenuItem mnemonicParsing="false" text="Prontuário" />
+                              <MenuItem mnemonicParsing="false" text="Receita" />
+                              <MenuItem mnemonicParsing="false" text="Convênio" />
+                              <MenuItem mnemonicParsing="false" text="Lista Resumida" />
+                              <MenuItem mnemonicParsing="false" text="LIsta Completa" />
+                              <MenuItem mnemonicParsing="false" text="Lista de Pacientes por Convênio" />
+                              <SeparatorMenuItem mnemonicParsing="false" />
+                              <MenuItem mnemonicParsing="false" text="Aniversariantes do Mês" />
+                              <MenuItem mnemonicParsing="false" text="Etiquetas Aniversariantes" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Financeiro">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Consultas Quitadas" />
+                              <MenuItem mnemonicParsing="false" text="Consultas em Aberto" />
+                          </items>
+                        </Menu>
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="Manutanção">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Fazer Backup" />
+                        <MenuItem mnemonicParsing="false" text="Carregar Backup" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Usuario">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#cadastroUsuario" text="Cadastrar" />
+                        <MenuItem mnemonicParsing="false" onAction="#trocaSenha" text="Trocar Senha" />
+                     </items></Menu>
+                  <Menu mnemonicParsing="false" text="Sobre" />
+              </menus>
+            </MenuBar>
+            <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="57.0" prefWidth="1024.0">
+               <items>
+                  <Button mnemonicParsing="false" onAction="#convenio" prefHeight="60.0" prefWidth="90.0" text="Convênio" />
+                  <Button mnemonicParsing="false" onAction="#especialidade" prefHeight="60.0" prefWidth="90.0" text="Especialidade" />
+                  <Button mnemonicParsing="false" onAction="#medico" prefHeight="60.0" prefWidth="90.0" text="Médico" />
+                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="90.0" text="Paciente" />
+                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="90.0" text="Horarios de Atendimento" />
+                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="90.0" text="Marcar Consulta" />
+                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="90.0" text="Consultas" />
+                  <VBox alignment="CENTER" prefHeight="60.0" prefWidth="402.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="32.0" prefWidth="429.0">
+                           <children>
+                              <Label text="Data:">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label fx:id="lbData" text="data">
+                                 <HBox.margin>
+                                    <Insets right="15.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label text="Hora:">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin></Label>
+                              <Label fx:id="lbHora" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="31.0" prefWidth="429.0">
+                           <children>
+                              <Label text="Usuário:">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label fx:id="lbUsuarioLogado" text="nome do usuario" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Button mnemonicParsing="false" onAction="#fechar" prefHeight="60.0" prefWidth="90.0" text="Sair" />
+               </items>
+            </ToolBar>
+         </children>
+      </VBox>
+   </top>
+</BorderPane>
