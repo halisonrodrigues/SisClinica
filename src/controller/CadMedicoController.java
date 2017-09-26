@@ -171,6 +171,7 @@ public class CadMedicoController {
     		tfCrm.setText(medicoEdit.getCrm());
     		tfCpf.setText(medicoEdit.getCpf());
     		cbEspecialidade.setDisable(true);
+    		tfNome.setDisable(true);
     	}
 	}
     
@@ -178,8 +179,10 @@ public class CadMedicoController {
     public void buscaNome(){
     	busca = true;
     	tfNome.setDisable(false);
+    	tfNome.setText("");
     	btNovo.setDisable(true);
     	btBuscarEspecialidade.setDisable(true);
+    	updateList("");
     }
     
     @FXML
