@@ -2,11 +2,13 @@ package controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -53,8 +55,20 @@ public class CadMedicoController {
 		
 		cbEspecialidade.getItems().clear();
 		List<Especialidade> especs = Especialidade.all();
-		for(Especialidade espec : especs){
-			cbEspecialidade.getItems().add(espec.getNome());
+		if (!especs.isEmpty()){
+			for(Especialidade espec : especs){
+				cbEspecialidade.getItems().add(espec.getNome());
+			}
+		} else {
+			Optional<ButtonType> result = Alertas.confirmacao("Nenhuma especialidade cadastrada!",
+					"Deseja cadastrar uma especialidade?");
+			if (result.get() == ButtonType.OK){
+				Main.especialidade();
+				Main.temEspecialidade = false;
+			} else {
+				Alertas.informacao("Impossível cadastrar um médico sem ter especialidade cadastrada!");
+				Main.temEspecialidade = false;
+			}
 		}
 		
 		TableColumn<Medico, String> colId = new TableColumn<Medico, String>("Cod.");
@@ -120,6 +134,7 @@ public class CadMedicoController {
 			cbEspecialidade.setValue("");
 			tfCrm.setText("");
 			tfCpf.setText("");
+			Main.temMedico = true;
     	}
     }
 

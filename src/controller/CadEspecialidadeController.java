@@ -93,6 +93,7 @@ public class CadEspecialidadeController {
 			btEditar.setDisable(false);
 			tfEspecialidade.setText("");
 			tfEspecialidade.setDisable(true);
+			Main.temEspecialidade = true;
 		} else {
 			Alertas.alertErros(mensagemErro);
 		}

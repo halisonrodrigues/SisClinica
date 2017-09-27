@@ -1,11 +1,14 @@
 package controller;
 
+import java.security.cert.PKIXRevocationChecker.Option;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -13,6 +16,7 @@ import javafx.stage.Stage;
 import model.Especialidade;
 import model.HorarioMedico;
 import model.Medico;
+import suporte.Alertas;
 
 public class CadHorarioMedicoController {
 
@@ -52,8 +56,20 @@ public class CadHorarioMedicoController {
     	// Preenchendo as opções do combobox de médicos
     	cbMedico.getItems().clear();
 		List<Medico> meds = Medico.all();
-		for(Medico med : meds){
-			cbMedico.getItems().add(med.getNome());
+		if (!meds.isEmpty()){
+			for(Medico med : meds){
+				cbMedico.getItems().add(med.getNome());
+			}
+		} else {
+			Optional<ButtonType> result = Alertas.confirmacao("Nenhum médico cadastrado!\n",
+					"Deseja cadastrar um médico?");
+			if (result.get() == ButtonType.OK){
+				Main.medico();
+				Main.temMedico = false;
+			} else {
+				Alertas.informacao("Impossível cadastrar um horário sem ter médico cadastrado!");
+				Main.temMedico = false;
+			}
 		}
 		
 		// preenchendo as opções do combobox de dia da semana
@@ -108,7 +124,6 @@ public class CadHorarioMedicoController {
     public void novo(ActionEvent e) {
 		ativaCampos(false);
 		
-		cbMedico.setValue(null);
 		cbDiaSemana.setValue("Segunda");
 		cbInicioHorario.setValue("08:00");
 		cbFinalHorario.setValue("08:00");

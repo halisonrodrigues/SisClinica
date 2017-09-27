@@ -179,7 +179,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+	public static boolean temEspecialidade = true;
 	public static void medico(){
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -191,14 +191,17 @@ public class Main extends Application {
 			Scene scene = new Scene(medico);
 			medicoStage.setScene(scene);
 			CadMedicoController controller = loader.getController();
-			controller.setDialogStage(medicoStage);
-			medicoStage.setResizable(false);
-			medicoStage.show();
+			if (temEspecialidade){
+				controller.setDialogStage(medicoStage);
+				medicoStage.setResizable(false);
+				medicoStage.show();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	public static boolean temMedico = true;
 	public static void horario(){
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -210,9 +213,11 @@ public class Main extends Application {
 			Scene scene = new Scene(horarioMedico);
 			horarioStage.setScene(scene);
 			CadHorarioMedicoController controller = loader.getController();
-			controller.setDialogStage(horarioStage);
-			horarioStage.setResizable(false);
-			horarioStage.showAndWait();
+			if (temMedico){
+				controller.setDialogStage(horarioStage);
+				horarioStage.setResizable(false);
+				horarioStage.showAndWait();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

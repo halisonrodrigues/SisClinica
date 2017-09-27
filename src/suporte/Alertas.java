@@ -2,8 +2,10 @@ package suporte;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Optional;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
@@ -50,5 +52,14 @@ public class Alertas {
 		alert.setHeaderText(null);
 		alert.setContentText(texto);
 		alert.showAndWait();
+	}
+	
+	public static Optional<ButtonType> confirmacao(String header, String texto){
+		Alert confirm = new Alert(AlertType.CONFIRMATION);
+		confirm.setTitle("Confirmação!!!");
+		confirm.setHeaderText(header);
+		confirm.setContentText(texto);
+		Optional<ButtonType> result = confirm.showAndWait();
+		return result;
 	}
 }
