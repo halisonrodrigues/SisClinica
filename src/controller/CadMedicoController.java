@@ -103,14 +103,6 @@ public class CadMedicoController {
     					data2);
     			med.save();
     			
-    			updateList("");
-    			ativaCampos(true);
-    			
-    			tfNome.setText("");
-    			cbEspecialidade.setValue("");
-    			tfCrm.setText("");
-    			tfCpf.setText("");
-    			
     			Alertas.informacao("Médico salvo com sucesso!");
     		} else {
     			medicoEdit.setNome(tfNome.getText());
@@ -118,18 +110,16 @@ public class CadMedicoController {
     			medicoEdit.setCrm(tfCrm.getText());
     			medicoEdit.setCpf(tfCpf.getText());
     			medicoEdit.save();
+    			
     			medicoEdit = null;
-    			
-    			updateList("");
-    			ativaCampos(true);
-    			
-    			tfNome.setText("");
-    			cbEspecialidade.setValue("");
-    			tfCrm.setText("");
-    			tfCpf.setText("");
-    			
     			Alertas.informacao("Dados editados com sucesso!");
     		}
+    		updateList("");
+			ativaCampos(true);
+    		tfNome.setText("");
+			cbEspecialidade.setValue("");
+			tfCrm.setText("");
+			tfCpf.setText("");
     	}
     }
 

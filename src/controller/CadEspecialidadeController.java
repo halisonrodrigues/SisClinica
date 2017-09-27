@@ -77,26 +77,22 @@ public class CadEspecialidadeController {
 			if (especEdit == null){ // Nova especialidade
 				Especialidade espec = new Especialidade(tfEspecialidade.getText());
 				espec.save();
-				btNovo.setDisable(false);
-				btSalvar.setDisable(true);
-				btCancelar.setDisable(true);
-				btEditar.setDisable(false);
-				tfEspecialidade.setText("");
-				tfEspecialidade.setDisable(true);
+				
 				Alertas.informacao("Especialidade salva com sucesso!");
-				updateList();
 			} else { //edição
 				especEdit.setNome(tfEspecialidade.getText());
 				especEdit.save();
-				btNovo.setDisable(false);
-				btSalvar.setDisable(true);
-				btCancelar.setDisable(true);
-				btEditar.setDisable(false);
-				tfEspecialidade.setText("");
-				tfEspecialidade.setDisable(true);
+				especEdit = null;
+				
 				Alertas.informacao("Especialidade editada com sucesso!");
-				updateList();
 			}
+			updateList();
+			btNovo.setDisable(false);
+			btSalvar.setDisable(true);
+			btCancelar.setDisable(true);
+			btEditar.setDisable(false);
+			tfEspecialidade.setText("");
+			tfEspecialidade.setDisable(true);
 		} else {
 			Alertas.alertErros(mensagemErro);
 		}

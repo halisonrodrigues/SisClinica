@@ -199,6 +199,25 @@ public class Main extends Application {
 		}
 	}
 	
+	public static void horario(){
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("/view/CadHorarioMedicoLayout.fxml"));
+			BorderPane horarioMedico = (BorderPane) loader.load();
+
+			Stage horarioStage = new Stage();
+			horarioStage.initOwner(stage);
+			Scene scene = new Scene(horarioMedico);
+			horarioStage.setScene(scene);
+			CadHorarioMedicoController controller = loader.getController();
+			controller.setDialogStage(horarioStage);
+			horarioStage.setResizable(false);
+			horarioStage.showAndWait();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}

@@ -93,24 +93,18 @@ public class CadConvenioController {
 	    				Float.parseFloat(valor),
 	    				recibo);
 	    		conv.save();
-	    		updateList();
-	    		ativaCampos(true);
-	    		
-	    		rbSim.setSelected(true);
-	    		tfConvenio.setText("");
-	    		tfValor.setText("");
     		} else {
     			convEdit.setNome(tfConvenio.getText());
     			convEdit.setValor(Float.parseFloat(valor));
     			convEdit.setRecibo(recibo);
     			convEdit.save();
-    			updateList();
-    			ativaCampos(true);
-
-    			rbSim.setSelected(true);
-    			tfConvenio.setText("");
-    			tfValor.setText("");
+    			convEdit = null;
     		}
+    		updateList();
+    		ativaCampos(true);
+    		rbSim.setSelected(true);
+			tfConvenio.setText("");
+			tfValor.setText("");
     	}
     }
 

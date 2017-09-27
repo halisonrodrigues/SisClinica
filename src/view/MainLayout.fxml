@@ -19,7 +19,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#especialidade" text="Especialidade" />
                         <MenuItem mnemonicParsing="false" onAction="#medico" text="Médico" />
                         <MenuItem mnemonicParsing="false" text="Paciente" />
-                        <MenuItem mnemonicParsing="false" text="Horario de Atendimento" />
+                        <MenuItem mnemonicParsing="false" onAction="#horario" text="Horario de Atendimento" />
                         <MenuItem mnemonicParsing="false" text="Medicamento" />
                         <MenuItem mnemonicParsing="false" text="Exame" />
                         <SeparatorMenuItem mnemonicParsing="false" />
@@ -87,7 +87,7 @@
                   <Button mnemonicParsing="false" onAction="#especialidade" prefHeight="60.0" prefWidth="90.0" text="Especialidade" />
                   <Button mnemonicParsing="false" onAction="#medico" prefHeight="60.0" prefWidth="90.0" text="Médico" />
                   <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="90.0" text="Paciente" />
-                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="90.0" text="Horarios de Atendimento" />
+                  <Button mnemonicParsing="false" onAction="#horario" prefHeight="60.0" prefWidth="90.0" text="Horarios de Atendimento" />
                   <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="90.0" text="Marcar Consulta" />
                   <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="90.0" text="Consultas" />
                   <VBox alignment="CENTER" prefHeight="60.0" prefWidth="402.0">

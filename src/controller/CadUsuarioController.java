@@ -128,13 +128,7 @@ public class CadUsuarioController {
 						status,
 						data2);
 				user.save();
-				limpaCampos();
-				ativaCampos(false);
-				updateList();
-				btNovo.setDisable(false);
-				btSalvar.setDisable(true);
-				btCancelar.setDisable(true);
-				btEditar.setDisable(false);
+				
 				Alertas.informacao("Usuário salvo com sucesso!");
 			} else { // edição
 				Usuario user = new Usuario(
@@ -147,16 +141,17 @@ public class CadUsuarioController {
 						status,
 						usuarioEdit.getDataCadastro());
 				user.save();
-				limpaCampos();
-				ativaCampos(false);
-				updateList();
-				btNovo.setDisable(false);
-				btSalvar.setDisable(true);
-				btCancelar.setDisable(true);
-				btEditar.setDisable(false);
+				
 				usuarioEdit = null;
 				Alertas.informacao("Dados do usuário editados com sucesso!");
 			}
+			limpaCampos();
+			ativaCampos(false);
+			updateList();
+			btNovo.setDisable(false);
+			btSalvar.setDisable(true);
+			btCancelar.setDisable(true);
+			btEditar.setDisable(false);
 		}
 	}
 	

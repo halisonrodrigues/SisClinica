@@ -54,6 +54,11 @@ public class MainController{
 		Main.medico();
 	}
 	
+	@FXML
+	public void horario(ActionEvent e){
+		Main.horario();
+	}
+	
 	public void mostrarHora() {
         DataHora ah = new DataHora(lbHora);
         ah.mostrarData(true);

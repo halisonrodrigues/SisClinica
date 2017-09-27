@@ -12,7 +12,7 @@ import suporte.Alertas;
 public class CadEmpresaController {
 	
 	private Stage dialogStage;
-	private Empresa empresaSalva;
+	
 	@FXML
 	private TextField tfNome;
 	@FXML
@@ -68,37 +68,8 @@ public class CadEmpresaController {
 	
 	@FXML
 	protected void btSalvar(ActionEvent e){
-		try {
-			if (tfNome.getText().isEmpty()){
-				throw new RuntimeException("O campo Nome não pode ser vazio!");
-			}
-			if (tfEndereco.getText().isEmpty()){
-				throw new RuntimeException("O campo Endereço não pode ser vazio!");
-			}
-			if (tfBairro.getText().isEmpty()){
-				throw new RuntimeException("O campo Bairro não pode ser vazio!");
-			}
-			if (tfCidade.getText().isEmpty()){
-				throw new RuntimeException("O campo Cidade não pode ser vazio!");
-			}
-			if (tfCep.getText().isEmpty()){
-				throw new RuntimeException("O campo CEP não pode ser vazio!");
-			}
-			if (tfTelefone.getText().isEmpty()){
-				throw new RuntimeException("O campo Telefone não pode ser vazio!");
-			}
-			if (tfEmail.getText().isEmpty()){
-				throw new RuntimeException("O campo Email não pode ser vazio!");
-			}
-			if (tfCnpj.getText().isEmpty()){
-				throw new RuntimeException("O campo CNPJ não pode ser vazio!");
-			}
-			if (tfInscricaoEstadual.getText().isEmpty()){
-				throw new RuntimeException("O campo Inscrição Estadual não pode ser vazio!");
-			}
-			
-			Empresa emp = Empresa.find();
-			
+		Empresa emp = Empresa.find();
+		if(isInputValid()){	
 			if (emp != null){
 				emp.setNomeEmpresa(tfNome.getText());
 				emp.setEndereco(tfEndereco.getText());
@@ -111,7 +82,7 @@ public class CadEmpresaController {
 				emp.setCnpj(tfCnpj.getText());
 				emp.setInscricao_estadual(tfInscricaoEstadual.getText());
 				emp.save();
-				Alertas.informacao("Os dados da empresa foram salvos com sucesso!");
+				Alertas.informacao("Os dados da empresa foram editados com sucesso!");
 			} else {
 				Empresa empresa = new Empresa(
 						tfNome.getText(),
@@ -127,7 +98,6 @@ public class CadEmpresaController {
 				empresa.save();
 				Alertas.informacao("Os dados da empresa foram salvos com sucesso!");
 			}
-		} catch (Exception ex) {
 		}
 	}
 	
@@ -179,6 +149,45 @@ public class CadEmpresaController {
 		btSalvarObj.setDisable(!b);
 		btEditarObj.setDisable(b);
 	}
+	
+	private boolean isInputValid(){
+		String errorMessage = "";
+		if (tfNome.getText().isEmpty()){
+			errorMessage += "O campo Nome não pode ser vazio!";
+		}
+		if (tfEndereco.getText().isEmpty()){
+			errorMessage += "O campo Endereço não pode ser vazio!";
+		}
+		if (tfBairro.getText().isEmpty()){
+			errorMessage += "O campo Bairro não pode ser vazio!";
+		}
+		if (tfCidade.getText().isEmpty()){
+			errorMessage += "O campo Cidade não pode ser vazio!";
+		}
+		if (tfCep.getText().isEmpty()){
+			errorMessage += "O campo CEP não pode ser vazio!";
+		}
+		if (tfTelefone.getText().isEmpty()){
+			errorMessage += "O campo Telefone não pode ser vazio!";
+		}
+		if (tfEmail.getText().isEmpty()){
+			errorMessage += "O campo Email não pode ser vazio!";
+		}
+		if (tfCnpj.getText().isEmpty()){
+			errorMessage += "O campo CNPJ não pode ser vazio!";
+		}
+		if (tfInscricaoEstadual.getText().isEmpty()){
+			errorMessage += "O campo Inscrição Estadual não pode ser vazio!";
+		}
+		if (errorMessage.length() == 0) {
+			return true;
+		} else {
+			// Mostra a mensagem de erro.
+			Alertas.alertErros(errorMessage);
+			return false;
+		}
+	}
+	
 	//----- GETS -----
 	public TextField getTfNome() {
 		return tfNome;
