@@ -1,6 +1,8 @@
 package controller;
 
-import java.security.cert.PKIXRevocationChecker.Option;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,8 +14,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import model.Especialidade;
 import model.HorarioMedico;
 import model.Medico;
 import suporte.Alertas;
@@ -21,6 +24,7 @@ import suporte.Alertas;
 public class CadHorarioMedicoController {
 
 	private Stage dialogStage;
+	private HorarioMedico horarioEdit = null;
 	
 	@FXML
     private ComboBox<String> cbMedico;
@@ -117,8 +121,8 @@ public class CadHorarioMedicoController {
 		colQtdPaciente.setCellValueFactory(data -> new SimpleStringProperty( data.getValue().getQtdPacientes().toString()) );
 		colQtdPaciente.setPrefWidth(140);
 		
-		tvHorario.getColumns().addAll(colDiaSemana, colHorario, colQtdPaciente);
-    }
+		tvHorario.getColumns().addAll(colDiaSemana, colHorario, colQtdPaciente);	
+	}
     
 	@FXML
     public void novo(ActionEvent e) {
@@ -132,20 +136,41 @@ public class CadHorarioMedicoController {
 
     @FXML
     public void salvar(ActionEvent e) {
-    	ativaCampos(true);
-    	
-    	cbMedico.setValue(null);
-		cbDiaSemana.setValue("Segunda");
-		cbInicioHorario.setValue("08:00");
-		cbFinalHorario.setValue("08:00");
-		cbQtdPacientes.setValue(1);
+    	Medico med = Medico.findByName(cbMedico.getValue());
+    	if (isInputValid()){
+    		if (horarioEdit == null){ // novo horário
+    			HorarioMedico horario = new HorarioMedico(
+    					med.getId(),
+    					cbDiaSemana.getValue(),
+    					cbInicioHorario.getValue()+" às "+cbFinalHorario.getValue(),
+    					cbQtdPacientes.getValue());
+    			horario.save();
+    			
+    			Alertas.informacao("Horário salvo com sucesso!");
+    		} else {
+    			horarioEdit.setIdMedico(med.getId());
+    			horarioEdit.setDiaSemana(cbDiaSemana.getValue());
+    			horarioEdit.setHorario(cbInicioHorario.getValue()+" às "+cbFinalHorario.getValue());
+    			horarioEdit.setQtdPacientes(cbQtdPacientes.getValue());
+    			horarioEdit.save();
+    			updateList("medico");
+    			horarioEdit = null;
+    			Alertas.informacao("Dados de horário editados com sucesso!");
+    		}
+    		ativaCampos(true);
+        	updateList("medico");
+        	cbDiaSemana.setValue("Segunda");
+    		cbInicioHorario.setValue("08:00");
+    		cbFinalHorario.setValue("08:00");
+    		cbQtdPacientes.setValue(1);
+    	}
     }
 
     @FXML
     public void cancelar(ActionEvent e) {
     	ativaCampos(true);
     	btExcluir.setDisable(true);
-    	
+    	updateList("limpar");
     	cbMedico.setValue(null);
 		cbDiaSemana.setValue("Segunda");
 		cbInicioHorario.setValue("08:00");
@@ -160,14 +185,46 @@ public class CadHorarioMedicoController {
 
     @FXML
     public void excluir(ActionEvent e) {
-    	ativaCampos(true);
-    	btExcluir.setDisable(true);
+    	Optional<ButtonType> result = Alertas.confirmacao(
+    			"Excluir horário!",
+    			"Temcerteza que deseja excluir este horário?");
+    	if (result.get() == ButtonType.OK){
+    		horarioEdit.delete();
+	    	ativaCampos(true);
+	    	btExcluir.setDisable(true);
+	    	cbDiaSemana.setValue("Segunda");
+			cbInicioHorario.setValue("08:00");
+			cbFinalHorario.setValue("08:00");
+			cbQtdPacientes.setValue(1);
+			updateList("medico");
+    	}
     }
 
     @FXML
     public void fechar(ActionEvent e) {
     	dialogStage.close();
     }
+    
+    @FXML
+	private void  handleClick(MouseEvent e){
+    	if (e.getButton() == MouseButton.PRIMARY){
+    		horarioEdit = tvHorario.getSelectionModel().getSelectedItem();
+    		cbDiaSemana.setValue(horarioEdit.getDiaSemana());
+    		cbInicioHorario.setValue(horarioEdit.getHorario().substring(0, 5));
+    		cbFinalHorario.setValue(horarioEdit.getHorario().substring(9));
+    		cbQtdPacientes.setValue(horarioEdit.getQtdPacientes());
+    		btExcluir.setDisable(false);
+    	}
+	}
+    
+    @FXML
+	private void  handleMedico(){
+    	cbMedico.valueProperty().addListener((obs, oldItem, newItem) -> {
+             if (newItem != null) {
+             	updateList("medico");
+          	}
+         });
+	}
     
     public void ativaCampos(boolean b){
     	btNovo.setDisable(!b);
@@ -178,4 +235,53 @@ public class CadHorarioMedicoController {
 		cbFinalHorario.setDisable(b);
 		cbQtdPacientes.setDisable(b);
     }
+    
+    private void updateList(String tipo) {
+		tvHorario.getItems().clear();
+		List<HorarioMedico> horarios = null;
+		switch (tipo) {
+		case "medico":
+			Medico med = Medico.findByName(cbMedico.getValue());
+			horarios = HorarioMedico.allById(med.getId());
+			break;
+		default:
+			horarios = HorarioMedico.all();
+			break;
+		}
+		if (tipo.equals("limpar")){
+			tvHorario.getItems().clear();
+		} else {
+			for(HorarioMedico h : horarios){
+				tvHorario.getItems().add(h);
+			}
+		}
+	}
+    
+    private boolean isInputValid() {
+    	Date horaInicio = null;
+    	Date horaFinal = null;
+		String errorMessage = "";
+		if (cbMedico.getValue().isEmpty() || cbMedico.getValue() == null){
+			errorMessage += "É preciso selecionar um médico!\n";
+		}
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+			String horaIni = cbInicioHorario.getValue();
+			horaInicio = sdf.parse(horaIni);
+			String horaFim = cbFinalHorario.getValue();
+			horaFinal = sdf.parse(horaFim);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		if (horaInicio.equals(horaFinal) || horaInicio.after(horaFinal)){
+			errorMessage += "Selecione um horário final maior que o horário inicial!\n";
+		}
+		if (errorMessage.length() == 0) {
+			return true;
+		} else {
+			// Mostra a mensagem de erro.
+			Alertas.alertErros(errorMessage);
+			return false;
+		}
+	}
 }

@@ -12,7 +12,7 @@ public class HorarioMedico {
 	private Integer qtdPacientes;
 	private String diaSemana;
 	
-	public HorarioMedico(Integer _id, Integer idMedico, String horario, Integer qtdPacientes, String diaSemana) {
+	public HorarioMedico(Integer _id, Integer idMedico, String diaSemana, String horario, Integer qtdPacientes) {
 		super();
 		this._id = _id;
 		this.idMedico = idMedico;
@@ -21,7 +21,7 @@ public class HorarioMedico {
 		this.diaSemana = diaSemana;
 	}
 
-	public HorarioMedico(Integer idMedico, String horario, Integer qtdPacientes, String diaSemana) {
+	public HorarioMedico(Integer idMedico, String diaSemana, String horario, Integer qtdPacientes) {
 		super();
 		this.idMedico = idMedico;
 		this.horario = horario;
@@ -80,8 +80,16 @@ public class HorarioMedico {
 		}
 	}
 	
+	public void delete(){
+		dao.delete(this);
+	}
+	
 	public static List<HorarioMedico> all(){
 		return dao.all();
+	}
+	
+	public static List<HorarioMedico> allById(int idMedico){
+		return dao.allById(idMedico);
 	}
 	
 	public static HorarioMedico findById(int pk){

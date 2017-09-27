@@ -216,9 +216,6 @@ public class CadMedicoController {
           		} 
              }
          });
-    	
-		
-		
 	}
     
     private void updateList(String tipo) {

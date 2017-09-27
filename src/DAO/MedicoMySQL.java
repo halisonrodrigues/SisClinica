@@ -194,4 +194,30 @@ public class MedicoMySQL extends DAO_MySQL{
 		}
 		return nomeEspec;
 	}
+
+	public Medico findByName(String nome) {
+		Medico med = null;
+		
+		open();
+		try {
+			Statement stm = con.createStatement();
+			String qr = "SELECT * FROM medico WHERE nome = '"+nome+"';";
+			ResultSet rs = stm.executeQuery(qr);
+			
+			if (rs.next()){
+				med = new Medico(
+						rs.getInt("id"),
+						rs.getString("nome"),
+						rs.getInt("id_especialidade"),
+						rs.getString("crm"),
+						rs.getString("cpf"),
+						rs.getDate("data_cadastro"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return med;
+	}
 }

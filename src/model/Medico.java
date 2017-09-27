@@ -93,6 +93,10 @@ public class Medico {
 		return dao.findById(pk);
 	}
 	
+	public static Medico findByName(String nome){
+		return dao.findByName(nome);
+	}
+	
 	public static List<Medico> findByEspecialidade(String nomeEspec){
 		return dao.allByEspecialidade(nomeEspec);
 	}

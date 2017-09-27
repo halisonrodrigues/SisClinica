@@ -59,7 +59,7 @@
                   <VBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="288.0">
                      <children>
                         <Label text="Medico" />
-                        <ComboBox fx:id="cbMedico" prefHeight="25.0" prefWidth="279.0" visibleRowCount="5" />
+                        <ComboBox fx:id="cbMedico" onMouseClicked="#handleMedico" prefHeight="25.0" prefWidth="279.0" visibleRowCount="5" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="106.0">
@@ -115,7 +115,7 @@
                   </VBox>
                </children>
             </HBox>
-            <TableView fx:id="tvHorario" prefHeight="172.0" prefWidth="412.0">
+            <TableView fx:id="tvHorario" onMouseClicked="#handleClick" prefHeight="172.0" prefWidth="412.0">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
