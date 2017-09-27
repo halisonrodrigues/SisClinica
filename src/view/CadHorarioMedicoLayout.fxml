@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadHorarioMedicoController">
+   <top>
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Cadastro de Horário de Atendimento">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btNovo" mnemonicParsing="false" onAction="#novo" prefWidth="65.0" text="Novo">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btSalvar" mnemonicParsing="false" onAction="#salvar" prefWidth="65.0" text="Salvar">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btCancelar" mnemonicParsing="false" onAction="#cancelar" prefWidth="65.0" text="Cancelar">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btEditar" mnemonicParsing="false" onAction="#editar" prefWidth="65.0" text="Editar">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btExcluir" mnemonicParsing="false" onAction="#excluir" prefWidth="65.0" text="Excluir">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#fechar" prefWidth="65.0" text="Fechar" />
+         </children>
+      </HBox>
+   </bottom>
+   <center>
+      <VBox alignment="CENTER" fillWidth="false" prefHeight="293.0" prefWidth="520.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="55.0" prefWidth="520.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="288.0">
+                     <children>
+                        <Label text="Medico" />
+                        <ComboBox fx:id="cbMedico" prefHeight="25.0" prefWidth="279.0" visibleRowCount="5" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="106.0">
+                     <children>
+                        <Label text="Dia da Semana" />
+                        <ComboBox fx:id="cbDiaSemana" prefHeight="25.0" prefWidth="104.0" visibleRowCount="5" />
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="55.0" prefWidth="520.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="194.0">
+                     <children>
+                        <Label text="Horário" />
+                        <HBox alignment="CENTER_RIGHT" prefWidth="191.0">
+                           <children>
+                              <Label text="Das">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ComboBox fx:id="cbInicioHorario" prefHeight="25.0" prefWidth="71.0" visibleRowCount="5">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                              <Label text="às">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ComboBox fx:id="cbFinalHorario" prefWidth="72.0" visibleRowCount="5">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT" fillWidth="false" prefHeight="55.0" prefWidth="106.0">
+                     <children>
+                        <Label text="Qtd Pacientes" />
+                        <ComboBox fx:id="cbQtdPacientes" prefHeight="25.0" prefWidth="55.0" visibleRowCount="5" />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="95.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+            <TableView fx:id="tvHorario" prefHeight="172.0" prefWidth="412.0">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </TableView>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
